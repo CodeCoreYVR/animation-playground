@@ -54,10 +54,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (toPlayNode) {
       toPlayNode.classList.toggle('animate');
-      toPlayNode.addEventListener('animationend', clearAnimateClass)
+
+      // in case button is pressed quickly, just always clear the listener
+      // before adding it
+      toPlayNode.removeEventListener('animationend', clearAnimateClass);
+
+      // node need to clear the animate class after the animation is finished
+      // if it doesn't exists in the first place
+      if (toPlayNode.classList.contains('animate')) {
+        toPlayNode.addEventListener('animationend', clearAnimateClass)
+      }
     }
-
-
   })
 
   Q('#pause').addEventListener('submit', function (event) {

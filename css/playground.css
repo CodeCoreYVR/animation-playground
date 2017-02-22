@@ -392,6 +392,10 @@ on animationiteration that toggles the class on for the fuchsia light */
   animation: 0.75s cubic-bezier(1,.5,.01,.61) 0s infinite SpinCircle;
 }
 
+/* Trigger an animation when #a0c6 gets the .animate class */
+#a0c6.animate {
+  animation: 0.75s cubic-bezier(1,.5,.01,.61) 0s 3 SpinCircle;
+}
 
 
 

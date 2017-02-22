@@ -10,6 +10,12 @@ Element.prototype.qs = function (query) { return this.querySelectorAll(query) }
 /* text manipulation helper */
 function initials (str) { return str.split(/\W+/).map(v => v[0]).join('') }
 
+function clearAnimateClass (event) {
+  const {currentTarget} = event;
+  currentTarget.classList.remove('animate');
+  currentTarget.removeEventListener('animationend', clearAnimateClass);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   /* programmaticaly generates uniquer ids for call card imgs */
   Qs('.holder').forEach(function (holder) {
@@ -39,10 +45,19 @@ document.addEventListener('DOMContentLoaded', function () {
     event.preventDefault();
   })
 
-  Q('#play').addEventListener('submit', function (event) {
+  Q('#play').addEventListener('click', function (event) {
     event.preventDefault();
     event.stopPropagation();
-    // put code to make play button functional here
+
+    const nodeId = Q('#node-id').value;
+    const toPlayNode = Q(`${nodeId}`);
+
+    if (toPlayNode) {
+      toPlayNode.classList.toggle('animate');
+      toPlayNode.addEventListener('animationend', clearAnimateClass)
+    }
+
+
   })
 
   Q('#pause').addEventListener('submit', function (event) {
@@ -50,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function () {
     event.stopPropagation();
     // put code to make pause button functional here
   })
-
 })
+
 
 
 

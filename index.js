@@ -2,13 +2,10 @@
 function Q (query) { return document.querySelector(query) }
 function Qs (query) { return document.querySelectorAll(query) }
 
-Element.prototype.q = function (query) {
-  return this.querySelector(query)
-}
-
-Element.prototype.qs = function (query) {
-  return this.querySelectorAll(query)
-}
+/* monkey patch Element prototype to easily search children nodes */
+/* generally regarded as bad practice 😱 */
+Element.prototype.q = function (query) { return this.querySelector(query) }
+Element.prototype.qs = function (query) { return this.querySelectorAll(query) }
 
 /* text manipulation helper */
 function initials (str) { return str.split(/\W+/).map(v => v[0]).join('') }
@@ -24,6 +21,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const doggoId = `${initials(holder.id)}${cardsIndex}c${i}`;
         imgNode.id = doggoId;
         h1Node.innerHTML = `#${doggoId}`;
+
+        // because the ids are assigned programmaticaly after the document is loaded
+        // if we try to search for the id #a0c5, it might not exists yet
+        // we'll define the event listener on it when the node is assigned the id
+        if (doggoId === 'a0c5') {
+            imgNode.addEventListener('animationiteration', function (event) {
+              console.log('Animation Iterated!')
+              Q('.fuchsia.light').classList.toggle('on');
+            })
+        }
       })
     })
   })
@@ -43,4 +50,18 @@ document.addEventListener('DOMContentLoaded', function () {
     event.stopPropagation();
     // put code to make pause button functional here
   })
+
 })
+
+
+
+
+
+
+
+
+
+
+
+
+/* */

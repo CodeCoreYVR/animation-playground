@@ -1,0 +1,127 @@
+body {
+  margin-bottom: 100vh;
+}
+
+h1 {
+  font-weight: 100;
+  margin: 0;
+}
+
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+
+  background-color: gainsboro;
+  padding: 5px;
+
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.lights {
+  display: flex;
+}
+
+.lights > *:not(:last-child) {
+  margin-right: 5px;
+}
+
+.light {
+  width: 2em;
+  height: 2em;
+  background-color: grey;
+  border-radius: 999999999px;
+  border: solid medium black;
+}
+
+.light.lime {
+  border-color: lime;
+}
+.light.gold {
+  border-color: gold;
+}
+.light.fuchsia {
+  border-color: fuchsia;
+}
+
+.light.on.lime {
+  background-color: lime;
+}
+.light.on.gold {
+  background-color: gold;
+}
+.light.on.fuchsia {
+  background-color: fuchsia;
+}
+
+form.controls {
+  display: flex;
+}
+
+form.controls > *:not(:last-child) {
+  margin-right: 5px;
+}
+
+.holder {
+  margin: 5px 5px 20vh 5px;
+  padding: 5px 0;
+  border: solid medium gainsboro;
+  border-radius: 5px;
+}
+
+.holder > * {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 5px 10px;
+}
+
+.holder > h1 {
+  background-color: gainsboro;
+  padding: 0.05em 0.1em;
+}
+
+.holder > h1:first-child {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+}
+
+.holder > .cards {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 5px;
+}
+
+.holder > .cards.stacked {
+  flex-flow: column;
+}
+
+.holder > .cards > * {
+  margin: 5px;
+  flex-basis: calc(100%/4 - 10px);
+}
+
+.card {
+  display: flex;
+  flex-flow: column;
+}
+
+.cards.stacked > .card {
+  width: calc(100%/4);
+}
+
+.card > img {
+  width: 100%;
+}
+
+.card > h1 {
+  margin: 0;
+
+  font-size: 1em;
+  line-height: 1em;
+
+  background-color: gainsboro;
+}

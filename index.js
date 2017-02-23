@@ -16,6 +16,20 @@ function clearAnimateClass (event) {
   currentTarget.removeEventListener('animationend', clearAnimateClass);
 }
 
+/* LAB SOLUTION: Animation Logging System (part 2) */
+function logAnimationInfo (event) {
+  const {type, propertyName, animationName, currentTarget: {id}} = event;
+  const isEnding = /end|run|cancel/.test(type);
+
+  if (isEnding) {
+    console.info(`%c#${id} ended ${animationName || propertyName}`, `color: red; font-weight: bold;`);
+    Q('.lime.light').classList.remove('on', 'animate-pulse');
+  } else {
+    console.info(`%c#${id} begun ${animationName || propertyName}`, `color: green; font-weight: bold;`);
+    Q('.lime.light').classList.add('on', 'animate-pulse');
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   /* programmaticaly generates uniquer ids for call card imgs */
   Qs('.holder').forEach(function (holder) {
@@ -71,6 +85,15 @@ document.addEventListener('DOMContentLoaded', function () {
     event.preventDefault();
     event.stopPropagation();
     // put code to make pause button functional here
+  })
+
+  /* LAB SOLUTION: Animation Logging System (part 1) */
+  Qs('.card.demo > img').forEach(function (node) {
+    node.addEventListener('animationend', logAnimationInfo)
+    node.addEventListener('animationstart', logAnimationInfo)
+    node.addEventListener('transitionend', logAnimationInfo)
+    // no support for transitionstart in chrome
+    node.addEventListener('transitionstart', logAnimationInfo)
   })
 })
 

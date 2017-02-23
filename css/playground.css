@@ -397,6 +397,53 @@ on animationiteration that toggles the class on for the fuchsia light */
   animation: 0.75s cubic-bezier(1,.5,.01,.61) 0s 3 SpinCircle;
 }
 
+/* LAB SOLUTIONS */
+/* Bounce Trajectory */
+
+@keyframes Line {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(300%); }
+}
+
+@keyframes Fall1 {
+  from { transform: translateY(-300%); }
+  to { transform: translateY(0%); }
+}
+
+@keyframes Rise1 {
+  from { transform: translateY(0%); }
+  to { transform: translateY(-150%); }
+}
+
+@keyframes Fall2 {
+  from { transform: translateY(-150%); }
+  to { transform: translateY(0%); }
+}
+
+@keyframes Rise2 {
+  from { transform: translateY(0%); }
+  to { transform: translateY(-50%); }
+}
+
+@keyframes Fall3 {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0%); }
+}
+
+#animations .card:last-child {
+  animation: 3s ease-out 0s 1 Line;
+}
+
+#animations .card:last-child > img {
+  animation:
+    0.5s ease-in 0s 1 forwards Fall1,
+    0.5s ease-out 0.5s 1 forwards Rise1,
+    0.5s ease-in 1s 1 forwards Fall2,
+    0.5s ease-out 1.5s 1 forwards Rise2,
+    0.5s ease-in 2s 1 forwards Fall3;
+
+}
+
 
 
 

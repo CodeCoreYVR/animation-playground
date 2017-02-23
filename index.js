@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /* programmaticaly generates uniquer ids for call card imgs */
   Qs('.holder').forEach(function (holder) {
     holder.qs('.cards').forEach(function (cards, cardsIndex) {
-      cards.qs('.card').forEach(function (card, i) {
+      cards.qs('.card.demo').forEach(function (card, i) {
         const imgNode = card.q('img');
         const h1Node = card.q('h1');
 

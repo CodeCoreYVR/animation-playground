@@ -38,6 +38,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // put code to make play button functional here
   })
 
+  Q('#play').addEventListener('click', function (event) {
+    event.preventDefault();
+    /* in the css file, there's animation that is triggered when
+    a node is given the class `skew`. we use javascript to add this
+    class to a node we want to animate */
+    Q('#a0c3').classList.toggle('skew');
+    Q('#a0c4').classList.toggle('border-dance');
+  })
+
   Q('#pause').addEventListener('submit', function (event) {
     event.preventDefault();
     event.stopPropagation();

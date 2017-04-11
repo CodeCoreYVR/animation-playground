@@ -13,48 +13,108 @@ filter: sepia(60%);
 filter: contrast(175%) brightness(3%);
 */
 
+#np0c1 {
+  filter: hue-rotate(180deg);
+}
+
+#np0c2 {
+  /*filter: invert(100%);*/
+  /*👆 is the default value */
+  filter: invert();
+}
+
+#np0c3 {
+  filter: blur(5px);
+}
+
+#np0c4 {
+  transform: skewX(20deg) skewY(10deg);
+  transform-origin: bottom left;
+}
+
+#np0c5 {
+  /* when doing a transform with perspective, make sure that it
+  appears as the first value in the list */
+
+  /* 👇 BAD! */
+  /*transform: rotateX(40deg) rotateY(20deg) rotateZ(30deg) perspective(200px);*/
+
+  /* 👇 GOOD! */
+  transform: perspective(200px) rotateX(40deg) rotateY(20deg) rotateZ(30deg);
+}
+
+/* EXERCISE: Practice */
+/* 1. Shift the hue of a doggo until it's red */
+#np0c6 {
+  filter: hue-rotate(325deg);
+}
+
+/* 2. Blur a doggo 2px and make look old with sepia */
+
+#np0c7 {
+  filter: blur(2px)
+   sepia(0.8);
+  /*filter: grayscale(); there can be only filter (or, any css property of the name
+  for that matter or highlander) */
+}
+
+/* 3. Translate a doggo 200px to the right */
+
+#np1c0 {
+  transform: translateX(200px);
+}
+
+/* 4. Scale a doggo 1.5 times larger, make its opacity 50% visible and make it
+monochrome */
+
+#np1c1 {
+  transform: scale(1.5);
+  opacity: 0.5;
+  filter: grayscale(0.5);
+}
+
 /*
- One-value syntax 
+ One-value syntax
 transform-origin: 2px;
 transform-origin: bottom;
 
- x-offset y-offset 
+ x-offset y-offset
 transform-origin: 3cm 2px;
 
- y-offset x-offset-keyword 
+ y-offset x-offset-keyword
 transform-origin: 2px left;
 
- x-offset-keyword y-offset 
+ x-offset-keyword y-offset
 transform-origin: left 2px;
 
- x-offset-keyword y-offset-keyword 
+ x-offset-keyword y-offset-keyword
 transform-origin: right top;
 
- y-offset-keyword x-offset-keyword 
+ y-offset-keyword x-offset-keyword
 transform-origin: top right;
 
- x-offset y-offset z-offset 
+ x-offset y-offset z-offset
 transform-origin: 2px 30% 10px;
 
- y-offset x-offset-keyword z-offset 
+ y-offset x-offset-keyword z-offset
 transform-origin: 2px left 10px;
 
- x-offset-keyword y-offset z-offset 
+ x-offset-keyword y-offset z-offset
 transform-origin: left 5px -3px;
 
- x-offset-keyword y-offset-keyword z-offset 
+ x-offset-keyword y-offset-keyword z-offset
 transform-origin: right bottom 2cm;
 
- y-offset-keyword x-offset-keyword z-offset 
+ y-offset-keyword x-offset-keyword z-offset
 transform-origin: bottom right 2cm;
 */
 
 
 /*
- Keyword values 
+ Keyword values
 transform: none;
 
- Function values 
+ Function values
 transform: matrix(1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
 transform: translate(12px, 50%);
 transform: translateX(2em);
@@ -77,19 +137,279 @@ transform: rotateY(10deg);
 transform: rotateZ(10deg);
 transform: perspective(17px);
 
- Multiple function values 
+ Multiple function values
 transform: translateX(10px) rotate(10deg) translateY(5px);
 */
 
 #t0c0 {
-  transition: border-bottom 0.5s, transform 1s ease 0.5s;
+  /* delay to wait until the transition begins */
+  transition-delay: 0.2s;
+  /* how long it takes for the transition to complete */
+  transition-duration: 3s;
+  /* which CSS property should be affected by transition */
+  transition-property: filter;
+  /* the curve that represents how a property changes over time (or, how it accelerates) */
+  transition-timing-function: linear;
 }
 
+/* :hover is a pseudo-selector that triggers when the mouse cursor goes over the
+selected node */
+
 #t0c0:hover {
-  border-bottom: solid aquamarine 4px;
-  transform-origin: bottom;
-  transform: scaleY(0);
+  filter: hue-rotate(360deg);
 }
 
 #t0c1 {
+  /* 👇 short form for transition in #t0c0 */
+  /* property | duration | timing-function | delay */
+  transition: filter 3s linear 0.2s;
 }
+
+#t0c1:hover {
+  filter: hue-rotate(360deg);
+}
+
+/* Blur a doggo to 5px in 1s, then scale it twice its size over 3s */
+
+#t0c2 {
+  transition: filter 1s 0s, transform 3s 1s;
+}
+
+#t0c2:hover {
+  filter: blur(5px);
+  transform: scale(2);
+}
+
+/* Make a 3px aquamarine border appear at the bottom in 0.4s, then
+flatten doggo over 1s */
+
+#t0c3 {
+  transition: border-bottom 0.4s 0s, transform 1s 0.4s;
+  transform-origin: bottom;
+}
+
+#t0c3:hover {
+  border-bottom: solid aquamarine 4px;
+  transform: scaleY(0);
+}
+
+/* Increase the right margin by 100% */
+
+#t0c4 {
+  /* transition on CSS "property" all means that this
+  transition definition will affect all CSS properties equally */
+  transition: all 0.5s;
+}
+
+#t0c4:hover {
+  margin-left: 100%;
+}
+
+/* 📝 Practice */
+
+/* 1. Turn the doggo into a circle over 0.5s by varying the border radius */
+
+#t0c5 {
+  transition: border-radius 0.5s 0s;
+}
+
+#t0c5:hover {
+  border-radius: 50%;
+}
+
+/* 2. Progressively turn a doggo black by varying its brightness over 2s */
+
+#t0c6 {
+  transition: filter 2s;
+}
+
+#t0c6:hover {
+  filter: brightness(0);
+}
+
+
+/* 3. Turn the doggo into a circle over 0.75s, then scale to nothing and turn it
+ * black over 0.5s */
+
+ #t0c7 {
+   transition: border-radius 0.75s, transform 0.5s 0.75s, filter 0.5s 0.75s;
+ }
+
+ #t0c7:hover {
+   border-radius: 50%;
+   transform: scale(0);
+   filter: brightness(0);
+ }
+
+/* Move a doggo up 5px over .5s, then rotate it 180deg */
+
+ #te4 {
+   transition: transform 0.5s;
+ }
+
+ #te4 > img {
+   transition: transform 0.5s 0.5s;
+ }
+
+ #te4:hover {
+   transform: translateY(-5px);
+ }
+
+ #te4:hover > img {
+   transform: rotate(180deg);
+ }
+
+/* A N I M A T I O N S */
+
+@keyframes Bob {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+#a0c0:hover {
+  /* refers the keyframe of the animation */
+  animation-name: Bob;
+  /* how long it takes for an animation to complete all keyframes */
+  animation-duration: 0.5s;
+  /* when the animation begins */
+  animation-delay: 0s;
+  /* the curve of how the CSS property are changed during the animation */
+  animation-timing-function: ease-in-out;
+  /* how many times the keyframes repeat */
+  animation-iteration-count: infinite;
+  /* whether an animation is paused or running */
+  animation-play-state: running;
+
+  /* duration | timing-function | delay | iteration count | name */
+  animation: 0.5s ease-in-out 0s infinite Bob;
+}
+
+/* create @keyframes ColorShift that changes background-color to red, green then blue.
+Trigger it on the lime light with :hover */
+
+@keyframes ColorShift {
+  0% { background-color: white; }
+  33% { background-color: red; }
+  66% { background-color: green; }
+  100% { background-color: blue; }
+}
+
+.lime.light {
+  animation: 5s linear 0s 1 ColorShift;
+
+  animation-play-state: paused;
+  /* setting this tells the animation to keep the property value of the last
+  frame instead of resetting to the initial state (before the animation) */
+  animation-fill-mode: both;
+}
+
+.lime.light:hover {
+  animation-play-state: running;
+}
+
+@keyframes SpinCircle {
+  0% {
+    border-radius: 0;
+    transform: rotate(0deg);
+  }
+  20% {
+    border-radius: 50%;
+    transform: rotate(45deg);
+  }
+  40% {
+    border-radius: 50%;
+    transform: rotate(135deg);
+  }
+  100% {
+    border-radius: 50%;
+    transform: rotate(9001deg);
+  }
+}
+
+#a0c1:hover {
+  animation: 5s ease-in-out 0s 1 forwards SpinCircle;
+}
+
+
+/* 📝 Practice */
+/* 1. Create @keyframes Squish that compreses a doggo to 2px height */
+
+@keyframes Squish {
+  /* changing dimensions of a node a property other than transform
+  will affect the DOM's surrounding nodes */
+  0% {
+    height: 77px;
+  }
+  100% {
+    height: 2px;
+  }
+}
+
+#a0c2:hover {
+  animation: 0.75s ease-out 0s 1 forwards Squish;
+}
+
+/* 2. Create @keyframes Skew that skewes a doggo from left to right over 0.5s for
+3 iterations */
+
+@keyframes Skew {
+  0%, 100% {
+    transform: skewX(0deg);
+  }
+  25% {
+    transform: skewX(-20deg);
+  }
+  75% {
+    transform: skewX(20deg);
+  }
+}
+
+.skew {
+  animation: 0.5s linear 0s infinite both Skew;
+  transform-origin: bottom;
+}
+
+/* 3. Create @keyframes BorderDance that grows a yellow left border up to 3px
+the grows the right up to 3px */
+
+@keyframes BorderDance {
+  0% {
+    border-left: solid yellow 0px;
+    border-right: solid yellow 0px;
+  }
+  25% {
+    border-left: solid yellow 5px;
+    border-right: solid yellow 0px;
+  }
+  75% {
+    border-right: solid yellow 5px;
+  }
+}
+
+.border-dance {
+  animation: 0.75s ease-in-out 0s infinite BorderDance;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* */

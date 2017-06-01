@@ -43,4 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
     event.stopPropagation();
     // put code to make pause button functional here
   })
+
+  Qs('.card.demo > img').forEach(function (node) {
+    node.addEventListener('click', function (event) {
+      const { currentTarget } = event;
+      currentTarget.classList.toggle('animate');
+    })
+  })
 })
